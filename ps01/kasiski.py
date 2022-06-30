@@ -25,7 +25,6 @@ def load_file(filename):
         s = "".join(line for line in f)
     return s
 
-
 def processFile(file):
     '''Takes a txt file as an input and turns it into a string containing only letters in lower case.'''
     with open(file) as f:
@@ -62,15 +61,16 @@ def test(k, c_freq, r_freq):
     '''Takes in the proposed shift, and the cipher and reference files letter frequencies. Tests the shift by calculating the sum of the products of corresponding letter frequences, considering shift k.'''
     '''Instead of taking in the cipher and reference files as stated in the instructions, the function uses the letter frequency dictionaries. This way we avoid recalculating the same information multiple times.'''
     sum = 0
-    for letter in alphabet:
-        c_letter_pos = (alphabet.find(letter) - k) % 26
-        c_letter = alphabet[c_letter_pos]
+    for letter in ALPHABET:
+        c_letter_pos = (ALPHABET.find(letter) - k) % 26
+        c_letter = ALPHABET[c_letter_pos]
         if c_letter in c_freq:
-            sum += r_freq[letter] * c_freq[c_letter]
+            sum += r_freq[letter.lower()] * c_freq[c_letter]
     
     return sum
+    
 def getShift(str, r_freq):
-    '''Returns both the shift amount and the score for that shift for a specific string and reference frequencies.'''
+    '''Returns the shift amount for a specific string and reference frequencies.'''
     c_freq = count_Ngram_frequency(str, 1)
     max = 0
     my_shift = 0
@@ -79,7 +79,7 @@ def getShift(str, r_freq):
         if curr > max:
             max, my_shift = curr, shift
 
-    return (my_shift, max)
+    return my_shift
 
 def get_key_shifts(l, c_mod, r_freq):
     categories = [""]*l
@@ -88,9 +88,15 @@ def get_key_shifts(l, c_mod, r_freq):
 
     shifts = [getShift(str, r_freq) for str in categories]
     return shifts
-def main():
-    cipher = load_file("vigenere.txt")
-    reference = processFile("shakespeare.txt")
+    
+def break_kasiski(filename, r_file):
+    cipher = load_file(filename)
+
+    if len(cipher) < 1:
+        print("File is empty")
+        quit()
+
+    reference = processFile(r_file)
 
     #for frequency analysis later
     r_freq = getLetterFreq(reference)
@@ -99,10 +105,12 @@ def main():
     freq_dict = count_Ngram_frequency(cipher, 3)
 
     sorted_by_freq=dict(sorted(freq_dict.items(),key= lambda x:x[1], reverse=True))
+    lst = list(sorted_by_freq.keys())
 
-    print(sorted_by_freq)
-    #figure out how far apart these bigrams are 
-    for key in freq_dict:
+    #figure out how far apart these trigrams are 
+    # for key in freq_dict:
+    for i in range(10):
+        key = lst[i]
         freq_dict[key] = []
         space_btw = 1
         for i in range(len(cipher)):
@@ -114,14 +122,10 @@ def main():
                 space_btw += 1
  
     combined_distances = []
-    lst = list(sorted_by_freq.keys())
-
     for i in range(10):
         combined_distances = combined_distances + freq_dict[lst[i]][1:]
     
-
     min_distance = int(min(combined_distances))
-    print(min_distance)
     factors_lst = []
     for i in range(1,min_distance+1):
         if min_distance % i == 0:
@@ -134,19 +138,15 @@ def main():
                 cur_biggest = i
             elif j % i != 0:
                 break
-    print(cur_biggest)
 
     #break vigenere
-    shifts = get_key_shifts(cur_biggest, cipher, r_freq)
-    key = []
-    for s in shifts:
-        key.append(s[0])
+    key = get_key_shifts(cur_biggest, cipher, r_freq)
 
+    #decipher the key
     letterKey = ""
     for num in key:
         letterKey += int2ltr(26-num)
-    print(letterKey)
-
+    
     plaintext = ""
     for i in range(len(cipher)):
         shift = key[i % len(key)]
@@ -156,11 +156,16 @@ def main():
             plaintext += int2ltr(ltr2int(cipher[i]) + shift).lower()
         else:
             plaintext += cipher[i]
-    print(plaintext)
     
     return plaintext
 
+def main():
+    new_file = open("decrypted_kasiski.txt", "w")
 
+    deciphered = break_kasiski('vigenere.txt', "shakespeare.txt")
+    
+    new_file.write(deciphered)
+    new_file.close()
 
 
 if __name__ == "__main__":

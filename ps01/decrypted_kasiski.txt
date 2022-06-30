@@ -1,0 +1,216 @@
+Mavis Batey, nee Lever (5 May 1921 to 12 November 2013) was a British
+codebreaker during World War II. Working for Intelligence Services
+Knox at Bletchley Park, her work was important for breaking the German
+Enigma G cipher machine as well as the success of D-Day.
+
+Mavis Lever was born on 5 May 1921 in Dulwich (UK) and was brought up
+in Norbury and Croydon, where she went to the Coloma Convent Girls'
+School. At the outbreak of WWII, she was studying German at University
+College (London).
+
+In 1940 she was recruited as a codebreaker by the Government Code &
+Cypher School. Initially she worked in London, where she worked on
+commercial codes. She also had to check the personal columns of The
+Times for codes spy messages. After showing promise, she was selected
+to work for a research unit run by Dillwyn (Dilly) Knox at Bletchley
+Park.
+
+Just 19 years old, she arrived at Bletchley Park, where she was
+introduced to Knox. Shortly afterwards, in March 1941, she had her
+first success when she broke the Italian Naval Enigma again, something
+that would prove to be vital to the victory in the Battle of Cape
+Matapan. Her most important work however, was the involvement in
+breaking the Enigma G, a special version of the Enigma that was used
+by the German Abwehr and that was thought to be unbreakable.
+
+Mavis met her future husband Keith Batey whilst working at Bletchley
+Park. The two got married during the war. On 12 November 2013, Mavis
+died at the age of 92 after a long and interesting life. Her Husband
+Keith, with whom she had three children, died in 2010 at the age of
+91.
+
+
+Bletchley Park
+
+
+Dilly Knox had been breaking the commercial Enigma as early as 1937,
+and in 1939 he was one of the driving forces behind the establishment
+of Bletchley Park. By the time Mavis arrived at the park, the
+codebreakers in Hut 6 were already reading the German Army and Air
+Force ciphers.
+
+Once Hut 6 was up and running, Knox had set up a research unit in The
+Cottage, a small building at the stableyard next to The Mansion, where
+he worked on codes and ciphers that had not yet been broken by the
+people in Hut 6.
+
+Arriving at the cottage at the age of 19, Mavis was first introduced
+to Knox who, eccentric and absent-minded as he was, said: Oh, hello,
+we're breaking machines, have you got a pencil? And that was it. She
+was never really told what to do and had to work out the rest for
+herself from scratch. That was the way the cottage worked.
+
+Her first job was to work on the updated Italian Naval Enigma, a
+system that had previously been broken by Dilly Knox, but that had
+since become unreadable. In March 1941 she broke into the system,
+after a German operator had made a crucial mistake when sending a test
+message.
+
+
+The Letter 'L'
+
+When Mavis picked up the test message, she noticed that there wasn't a
+single 'L' in it. Knowing that one of the weaknesses of the Enigma was
+that a letter could never be encoded into itself, she concluded that
+the operator had repeatedly been pressing the rightmost key on the
+bottom row.
+
+After reconstructing the wiring of the machine a short message was
+received and deciphered. It read: Today's the day minus three. Not
+knowing what it meant, the team worked and waited for three full days
+and nights until an extremely long and detailed Italian Naval message
+came in.
+
+
+The Battle of Cape Matapan
+
+Apparently, the Italians were sending detailed messages about a
+planned attack on a Royal Navy convoy carrying supplies from Cairo to
+Greece. There were full details about the number of ships and
+submarines that were involved, plus a full timing schedule. The plans
+were sent on to the Admiralty in London, who passed it on to Admiral
+Cunningham, the commander of the Royal Navy who was responsible for
+the Mediterranean Fleet. And Cunningham was able to play a nice trick.
+
+During WWII, Japan was one of Germany's closest allies. The movements
+of the Royal Navy in the Mediterranean waters were closely watched by
+the Japanese consul in Alexandra (Greece) who was sending detailed
+reports to the Germans.
+
+Admiral Cunningham, who was also stationed in Alexandra, knew that the
+consul was a keen golf player, so he took his clubs and an overnight
+bag and visited the clubhouse, pretending that he knew nothing and was
+going to stay for the weekend. Under the cover of night however, he
+left the clubhouse and guided the nightly attack.
+
+The rest is history. The Italians had no radar and were caught
+completely by surprise. In a series of battles on 27/28 March 1941,
+that became known as the Battle of Cape Matapan, Cunningham attacked
+the Italian vessels, sinking three heavy cruisers, two destroyers, and
+killing 3000 men.
+
+Cunningham later visited Bletchley Park personally to express his
+gratitude. On this occasion, the girls had to rush out into a local
+pub to get some wine to celebrate the visit of the Admiral and the
+victory at Matapan. The Italians never confronted the Mediterranean
+Fleet again and the Battle of Cape Matapan remained the last fleet
+action to have been fought by the Royal Navy during the course of the
+war. In 1943, Cunningham took the surrender of the Italian Navy.
+
+
+The Abwehr Enigma
+
+Although her contribution to the victory in the Battle of Matapan was
+truely significant, Mavis' most important work had yet to come. It was
+her collaboration with Dilly Knox and Margret Rock, another leading
+female codebreaker, on breaking the Enigma G, a special version of the
+Enigma machine that was used by the German secret service, the
+Abwehr. It had not been broken by Hut 6 and for a while was thought to
+be unbreakable. By now, the name of Dilly Knox' the research unit was
+changed to ISK, which was short for Intelligence Services Knox, or
+Illicit Services Knox.
+
+During WWII, the Germans had spies in a number of capitals, including
+London. After MI5 and MI6 had captured most of the spies in Britain
+and in the neutral capitals of Madrid and Lisbon, they sucessfully
+turned them and used them to feed false information to the
+Germans. This operation became known as the Double-Cross system (XX).
+
+They had no idea whether the Germans believed the false intelligence
+that was fed to them, and there was no way of checking this, as the
+the device was so complex that the mathematicians in Hut 6 had so far
+been unable to break it.
+
+The Enigma G had no Steckerbrett but featured 11, 15 and 17 turnover
+notches on the wheels, and had a moving reflector. It was also known
+as the 11-15-17 machine. Knox took over the job of breaking the Enigma
+G from Hut 6 and used Mavis Batey and Margret Rock as his
+assistents. It was their job to test every possibility. On 8 December
+1941, Mavis broke a message from the Abwehr link between Belgrade and
+Madrid, which allowed them to reconstruct one of the wheels.
+
+Within a few days, Knox had broken into the Abwehr Enigma. Shortly
+afterwards, Mavis broke another Abwehr machine, the so-called
+GGG. This allowed them to read the high-level Abwehr messages that
+confirmed that the Germans had bought the false Double-Cross
+intelligence. The Double-Cross Committee (XX Committee) [5] was now
+able to feed the Germans small pieces of information that led them to
+believe that the main Allied invasion would take place on the Pas de
+Calais rather than on Normandy. As a result, they kept two armoured
+divisions in the Calais area.
+
+
+Keith Batey
+
+
+Mavis met her future husband at Bletchley Park and married him during
+the war. One night, she was working alone on an evening shift in the
+Cottage, when she was confronted with a difficult codebreaking problem
+that she could not solve. In order to solve the problem, Mavis turned
+to the mathematicians of Hut 6, where break-in expert Keith Batey was
+on duty that night.
+
+Life at Bletchley Park was compartmented, and people had instructions
+not to contact members from other huts and not to discuss work outside
+the office. Nevertheless Dilly had no problem in seeking contact with
+other departments in order to solve problems. In fact, he stronly
+denounced the military imposed need-to-know policy.
+
+In the event, Mavis and Keith investigated the problem and after
+several cups of ersatz coffee, he helped here solve the problem. It
+was the start of a romance that would last for 70 years.
+
+When she told him, Dilly had absolutely no objections with her seeking
+help from Hut 6 and when she later told him that she was going to
+marry, what he called 'one of the clever Cambridge mathematicians from
+Hut 6', he even bought the young couple a lovely wedding present.
+
+
+After the War
+
+
+After the war, Mavis developed in interest in the protection of
+historical gardens and successfully campaigned for the Protection of
+Rural England, English Heritage and the Garden History Society. In
+addition, she wrote many books abouts landscapes and gardens, such as
+Jane Austen and the English Landscape (1996) and Alexander Pope:
+Poetry and Landscape (1999).
+
+The work at Bletchley Park was classified. For more than 30 years she
+and her husband Keith never spoke about their wartime work, but after
+the revelations in Frederick Winterbotham's book The Ultra Secret she
+became a frequent guest in television documentaries and newspaper
+articles.
+
+In 2009, she finally wrote a book about her war­time boss Dilly Knox
+and the work they carried out in the Cottage. The book was presented
+at a special Enigma Reunion that was held on 5 and 6 September 2009 at
+BP to commemorate the 70th anniversary of the WWII codebreaking
+centre.
+
+The book is titled: Dilly, The Man Who Broke Enigmas [2] and is a warm
+affectionate biography of one of the most intriguing heros of World
+War II. During the book presentation at the Enigma Reunion, staged in
+the library of the Mansion, some books were even signed personally by
+Mavis.
+
+The image above was taken on 5 September 2009 during the Enigma
+Reunion at Bletchley Park. It shows Mavis and her husband Keith right
+at the centre of attention in a private moment with David Hamer (left)
+and Sir Francis Richards (second from the left). Despite their high
+age, both Mavis and Keith were still in good health during this
+event. Keith would die a year later at the high age of 91. After an
+interesting life, Mavis died on 12 November 2013 at the age of 92.
+
+This biography is from www dot cryptomuseum dot com slash people slash
+mavis_batey dot htm.

@@ -1,0 +1,27 @@
+Problem2.txt 
+Written by Adela Dujsikova and Thien K. M. Bui
+How we deciphered homophonic substitution
+
+We started deciphering the text by looking at the frequencies of all numbers used. While most frequencies were in the thousands, four numbers had frequencies significantly lower. This suggested that they coded for the four least commonly used letters in the English language. These letters, likely, have only one number encoding them due to their lower presence in the natural language. We concluded that
+59, 74, 10, and 6 were coding for 'z', 'q', 'x', and 'j'. We started deciphering the text using these letters.
+
+First, we printed all the bigrams containing number 59. We noticed that there was a bigram 59 59, suggesting the letter can follow itself. Out of our 4 options, only 'z' can follow itself, therefore we decided that 59 codes for 'z'.
+Then we printed bigrams starting with 74. We saw that the number was almost exclusively followed by only 3 other numbers, 60, 32, and 88. Knowing that 'q' is almost always followed by a 'u', we were able to deduce that 74 most likely coded for 'q' and 60, 32, and 88 were 'u'. 
+We didn't have a way of distinguishing between 10 and 6, so we noted that one of them is 'x' and the other one is 'j'.
+
+After this analysis we moved to looking at trigrams. We printed out all trigrams that occurred in the ciphertext more than 20 times. We assumed that most of these trigrams would refer to only 2 or 3 actual letter trigrams. Based on this assumption, we tried to group the trigrams based on which ones most likely code for the same letter trigram. For example, the most common trigram is "94 30 14". Then "94 30 x1", "94 x2 14", and "x3 30 14" should be coding for the same letter trigram. We found the trigrams that fit this form: "94 30 90", "94 35 14", "94 11 14", "94 41 14", "94 15 14", "94 5 14", "36 30 14", "23 30 14", "69 30 14". Now we had that 94 = 36 = 23 = 69 code for the same letter, 30 = 35 = 11 = 41 = 15 = 5 code for the same letter, and 14 = 90. Then we expanded the group by any trigrams that had two of the identified numbers in the right position. We ended up with the following:
+94 = 64 = 23 = 69 = 53 = 36   
+30 = 35 = 5  = 15 = 41 = 11   
+14 = 90
+
+The remaining trigrams from the most common trigrams that we printed could be groupped together according to the same principle. We got the following:
+92 = 77					
+1  = 7  = 51 = 83 = 24 = 13 = 89 = 9
+88 = 32 = 60
+
+There didn't seem to be any overlaps between the groups, therefore we could conclude that each of these groups codes for a different letter. The fact that 88, 32, and 60 have already been identified as coding for 'u' gave the groups we created some credibility. Now we had to identify which letter the codes stand for. We started with the third trigram, because we already knew the last letter was 'u'. We checked https://www3.nd.edu/~busiforc/handouts/cryptography/Letter%20Frequencies.html
+to see what the most common trigrams in English were. The only one that ended with 'u' was "you". To see if this was actually plausible, we looked at the letter frequencies of 'y', 'o', and 'u'. We know that in homophonic cipher the more frequent letter have more characters that code for them. Since freq('y') < freq('u') < freq('o') and the number of characters coding for the letter follow the same pattern, we concluded that the second trigram was "you". 
+
+To deduce that our first trigram is "ing", we looked at the list of the most popular trigrams in English. We knew it couldn't be "the" because 'e' would have far more characters coding for it. Hence the trigrams we were deciding between were "and" and "ing". While both were good choices, "ing" fit the frequencies better and therefore we identified the first trigram to be "ing".
+
+Then we created a key, which is a dictionary that has all the numbers as keys and the decoded letters as values. We put in all the letters we decoded (q, u, z, y, o, i, n, g) and translated the ciphertext. We noticed the sequence of "87 nyon 71". "nyon" is a rather unusual sequence of letters, so it was rather clear that 87 = a and 71 = e. From this point on we worked with the translated text, looked for sequences of letters that appeared either unique or had common endings of words (e.g. -tions), and filled out the rest of the dictionary. After a while, words like "gutenberg", "foundation", and "information" could be used to find the common substitution of the more popular English characters.

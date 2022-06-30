@@ -8,6 +8,8 @@
 import sys
 from collections import defaultdict
 
+from substitution_ciphers import vigenere
+
 alphabet = "abcdefghijklmnopqrstuvwxyz"
 ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
 
@@ -73,10 +75,16 @@ def test(k, c_freq, r_freq):
     return sum
 
 def breakCaesar(c, r):
-    '''Takes in the cipher and reference files. Tests all shifts and chooses the one with the highest sum, then uses the associated shift to decode the ciphertext.'''
+    '''Takes in the cipher and reference files. Tests all shifts and chooses the one with the highest sum, then uses the associated shift to decode the ciphertext, which is returned.'''
     r_mod, c_mod = processFile(r), processFile(c)
+
+    if len(r_mod) < 1 or len(c_mod) < 1:
+        print("File is empty")
+        quit()
+        
     r_freq, c_freq= getLetterFreq(r_mod), getLetterFreq(c_mod)
-    
+
+    # find the best shift
     max = 0
     my_shift = 0
     for shift in range(26):
@@ -84,9 +92,11 @@ def breakCaesar(c, r):
         if curr > max:
             max, my_shift = curr, shift
 
+    # load the original ciphertext
     with open(c) as ciphertext:
         str = "".join(line for line in ciphertext)
-    
+
+    # translate the ciphertext into plaintext
     message = ""
     for ch in str:
       if ch in alphabet:
@@ -103,7 +113,7 @@ def breakCaesar(c, r):
 
 ### second part starting here
 def getShift(str, r_freq):
-    '''Returns both the shift amount and the score for that shift for a specific string and reference frequencies.'''
+    '''Returns both the shift amount (int) and the score for that shift for a specific string and reference frequencies.'''
     c_freq = count_Ngram_frequency(str, 1)
     max = 0
     my_shift = 0
@@ -115,10 +125,13 @@ def getShift(str, r_freq):
     return (my_shift, max)
 
 def getKeyLengthScore(l, c_mod, r_freq):
+    '''Calculates the score for a key of given length. For a key of length l, there are l different shifts and shif scores that are calculated. The score for the key length is the average of this scores. Both the individual shift values and the overall score are returned.'''
+    # divide the text into trenches
     categories = [""]*l
     for i in range(len(c_mod)):
         categories[i%l] += c_mod[i]
 
+    # collect the individual shift scores and average them
     shifts = [getShift(str, r_freq) for str in categories]
     sum = 0
     for item in shifts:
@@ -151,8 +164,15 @@ def findPattern(list):
 
 def breakVigenere(c, r):
     r_mod, c_mod = processFile(r), load_file(c)
+
+    if len(r_mod) < 1 or len(c_mod) < 1:
+        print("File is empty")
+        quit()
+
     r_freq = getLetterFreq(r_mod)
 
+
+    #find most probable key length (1-100) and the shift associated with it
     max = 0
     shifts = []
     for i in range(1,100):
@@ -160,16 +180,18 @@ def breakVigenere(c, r):
         if curr_score > max:
             max, shifts = curr_score, curr_sh
 
+    #find pattern of key
     key = []
     for s in shifts:
         key.append(s[0])
     key = findPattern(key)
 
+    #decipher key
     letterKey = ""
     for num in key:
         letterKey += int2ltr(26-num)
-    print(letterKey)
 
+    #translating
     plaintext = ""
     for i in range(len(c_mod)):
         shift = key[i % len(key)]
@@ -179,9 +201,20 @@ def breakVigenere(c, r):
             plaintext += int2ltr(ltr2int(c_mod[i]) + shift).lower()
         else:
             plaintext += c_mod[i]
-    print(plaintext)
     
     return plaintext
 
-# print(breakVigenere('vigenere.txt', 'shakespeare.txt'))
+def main():
+    caesarian = open("decrypted_caesar.txt", "w")
+    deciphered = breakCaesar('caesar.txt', "shakespeare.txt")
+    caesarian.write(deciphered)
+    caesarian.close()
 
+    vigenere = open("decrypted_vigenere.txt", "w")
+    deciphered2 = breakVigenere("vigenere.txt", "shakespeare.txt")
+    vigenere.write(deciphered2)
+    vigenere.close()
+
+
+if __name__ == "__main__":
+    main()

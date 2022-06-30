@@ -1,13 +1,10 @@
-# substitution_ciphers.py
-# Caesar, Substitution, Vigenere, and Homophonic Substitition ciphers
-#
-# CS 341 Cryptography, Carleton College
-# David Liben-Nowell (dln@carleton.edu)
+#my_test.py
+#Author: Adela Dujsikova and Thien K. M. Bui
+#To be used for testing legend.txt with caesar and vigenere encryption
+
 
 from collections import defaultdict
 import random
-
-
 # ----- UTILITY FUNCTIONS ---------------------------------------------------- #
 
 ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -139,68 +136,21 @@ def vigenere(key):
                 ciphertext += plaintext[i]
         return ciphertext
     return encipher
-
-def homophonic_substitution(reference_file, alphabet_size):
-    '''Homophonic Substitution Cipher: a (randomized) substitution cipher,
-       built to ensure nearly equal frequencies of all symbols in the
-       ciphertext (for a plaintext distributed as normal English).
-       Specifically, given a reference text, we allocate symbols {0,
-       1, ..., alphabet_size - 1} to each letter, allowing multiple
-       symbols per letter, roughly in proportion to the unigram
-       frequencies in the reference text.  (Each letter is allocated
-       at least one symbol.)  Then, to encode a plaintext, each letter
-       is replaced by one of its corresponding symbols, chosen at
-       random.  Symbols are allocated based on the "Method of Equal Proportions"
-       [https://www.census.gov/population/apportionment/about/computing.html].
-
-       Note: this encryption does NOT maintain case, and everything
-       nonalphabetical is stripped out, except newlines.'''
-
-    # Count frequencies in the reference text, and create randomly
-    # ordered set of symbols {0, 1, ..., alphabet_size - 1}.
-    freq = count_Ngram_frequency(load_file(reference_file))
-    unused_symbols = random.sample(range(alphabet_size), alphabet_size)
-    symbols = {}
-
-    # Every letter is automatically given one symbol ...
-    for ch in ALPHABET:
-        symbols[ch] = [unused_symbols.pop()]
-
-    # ... and then each remaining symbol is allocated to the letter i with the
-    # largest "need", where need is defined as f[i] / sqrt(n[i] * (n[i] + 1))
-    # where f[i] = frequency and n[i] = current number of symbols for letter i.
-    need = lambda ch: freq[ch]/(len(symbols[ch]) * (1 + len(symbols[ch])))**0.5
-    while len(unused_symbols) > 0:
-        neediest = max(ALPHABET, key=need)
-        symbols[neediest].append(unused_symbols.pop())
-
-    def encipher(plaintext):
-        ciphertext = []
-        for ch in plaintext.upper():
-            if ch in ALPHABET:
-                ciphertext.append(str(random.choice(symbols[ch])))
-            elif ch == "\n":
-                ciphertext.append(ch)
-        return ciphertext
-    return encipher
-
-
-
+    
 def main():
-    print("Here are a few sample encipherments.")
-    print()
-    print(caesar(random.randint(0,25))("Welcome to Cambridge."))
-    print(caesar(random.randint(0,25))("Fancy a punt?"))
-    print()
-    print(substitution_cipher("ADALOVELACE")("Flee at once.  We are discovered!"))
-    print(substitution_cipher(None)("Flee at once.  We are discovered!"))
-    print()
-    print(vigenere("TURING")("CAMBRIDGEENGLAND"))
-    print(vigenere("LEMON")("ATTACKATDAWN"))
-    print()
-    encipherer = homophonic_substitution("shakespeare.txt",100)
-    print(encipherer("GRACEHOPPER"))
-    for ch in ALPHABET:
-        print("   ", ch, [x for x in range(100) if str(x) in encipherer(ch * 1000)])
+
+    with open("legend.txt", "r") as f:
+        raw_txt = "".join(line for line in f)
+
+    caesar_file = open("enciphered_caesar.txt", "w")
+    enciphered_caesar = caesar(random.randint(0,25))(raw_txt)
+    caesar_file.write(enciphered_caesar)
+    caesar_file.close()
+
+    vigenere_file = open("enc_vig.txt", "w")
+    enc_vig = vigenere("T")(raw_txt)
+    vigenere_file.write(enc_vig)
+    vigenere_file.close()
+
 if __name__ == "__main__":
     main()

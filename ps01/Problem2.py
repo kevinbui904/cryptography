@@ -3,7 +3,50 @@
 #
 # CS 341 Cryptography, Carleton College
 # David Liben-Nowell (dln@carleton.edu)
-# Adela Dujsikova and Kevin Bui
+
+from collections import defaultdict
+
+
+def load_file(filename):
+    '''Load all of the text from the given file into a single string.'''
+    with open(filename, "r") as f:
+        s = "".join(line.rstrip() for line in f)
+    return s.split(" ")
+
+def count_Ngram_frequency(text, n=1):
+    '''Count all sequences of N consecutive letters in the given string,
+       and return a (default) dictionary of those counts.  Does NOT
+       maintain case; all counts are for the input string converted to
+       all upper case.  (So n=1 is unigrams, n=2 is bigrams, etc.)'''
+    counts = defaultdict(int)
+    for i in range(len(text) - n + 1):
+        ngram = text[i:i+n]
+        if n == 1 and len(ngram[0])>0:
+            counts[int("".join(ngram))] += 1
+        elif len(ngram[0])>0:
+            counts[tuple(ngram)] += 1
+    return counts
+
+def analyze(c):
+    ciphertext = load_file(c)
+    unigrams = count_Ngram_frequency(ciphertext, 1)
+    bigrams = count_Ngram_frequency(ciphertext, 2)
+    trigrams = count_Ngram_frequency(ciphertext, 3)
+    quadgram = count_Ngram_frequency(ciphertext, 4)
+
+    unigrams_sorted = dict(sorted(unigrams.items(),key= lambda x:x[1]))
+    bigrams_sorted = dict(sorted(bigrams.items(),key= lambda x:x[1]))
+    trigrams_sorted = dict(sorted(trigrams.items(), key = lambda x:x[1]))
+    quadgrams_sorted = dict(sorted(quadgram.items(), key = lambda x:x[1]))
+
+    print("=====UNIGRAM=====")
+    print(unigrams_sorted)
+
+    print("=====TRIGRAM=====")
+    for key in trigrams_sorted.keys():
+        if trigrams_sorted[key] > 20:
+            print(key, trigrams_sorted[key])
+
 
 def breakHomophonic(c):
     cipher_map = {
@@ -109,22 +152,30 @@ def breakHomophonic(c):
         "99": "f",
     }
 
-    new_file = open("decrypted_homophonic.txt", "w")
-
+    deciphered = ""
     with open("homophonic_substitution.txt", "r") as f:
         for line in f:
-            new_string = ""
+            new_ln = ""
             for word in line.split():
                 # print(word)  # word = "19 82 34" -> ["19", "82", "34"]
                 if word in cipher_map.keys() and cipher_map[word] is not None:
-                    new_string += cipher_map[word]
+                    new_ln += cipher_map[word]
                 else:
-                    new_string += " "+ word + " "
-            new_file.writelines(new_string + "\n")
-            print(new_string)
+                    new_ln += " "+ word + " "
+       
+            deciphered += new_ln + "\n"
     
-    new_file.close()
-        
-    return None
+    return deciphered
 
-breakHomophonic('homophonic_substitution.txt')
+def main():
+    new_file = open("decrypted_homophonic.txt", "w")
+
+    deciphered = breakHomophonic('homophonic_substitution.txt')
+    
+    new_file.write(deciphered)
+    new_file.close()
+
+
+if __name__ == "__main__":
+    main()
+
