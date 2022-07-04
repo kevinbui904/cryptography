@@ -5,7 +5,7 @@
 # David Liben-Nowell (dln@carleton.edu)
 
 import argparse
-from substitution_ciphers import ltr2int, int2ltr, ALPHABET
+from substitution_ciphers import ltr2int, int2ltr, ALPHABE
 
 # Details on the rotors as listed here are from a variety of online
 # sources.  Rotor details come from Tony Sale's Codes and Ciphers.
