@@ -77,22 +77,20 @@ class Rotor:
 
 
 def enigma(slow, medi, fast,
-           plugboard_pairs, ring_setting, initial_position, config):
+           plugboard_pairs, ring_setting, initial_position):
     slowR = Rotor(slow, ring_setting[0], initial_position[0])
     mediR = Rotor(medi, ring_setting[1], initial_position[1])
     fastR = Rotor(fast, ring_setting[2], initial_position[2])
     reflector  = Rotor("reflector", "A", "A")
 
-    plugboard = generate_plugboard(config)
+    plugboard = generate_plugboard(plugboard_pairs)
 
-                 
     def encipher(message, debug=False):
         output = ""
         windows, transformations = ["%s%s%s" % (slowR,mediR,fastR)], ""
         for ch in message:
             if ch in plugboard.keys():
                 ch = plugboard[ch]
-
             transformations = transformations + ch
             mfLeverActive = fastR.in_notch()
             smLeverActive = mediR.in_notch()
@@ -107,6 +105,8 @@ def enigma(slow, medi, fast,
             for rotor in [slowR, mediR, fastR]:
                 ch = rotor.encode(ch, inverted=True)
                 transformations = transformations + " -> " + ch
+            if ch in plugboard.keys():
+                ch = plugboard[ch]
             output += ch
             transformations = transformations + "\n"
         if debug:
@@ -115,27 +115,26 @@ def enigma(slow, medi, fast,
         
     return encipher
 
+#example usage: enigma("I","II","III", [("G", "B"), ("X", "Z")], "AAA", "AAZ")("G", debug=True)
 def generate_plugboard(config):
     if len(config) < 1:
         return {}
     plugboard = {}
-    #example string: "a:b, c:d, e:f,"
-    swap_tuples = config.split(",")
-
-    #we add all inputs into a list to check for existence so that a letter don't get used twice
+    # #we add all inputs into a list to check for existence so that a letter don't get used twice
     used_lst = []
-    for pair in swap_tuples:
-        pair = pair.split(":")
-        for ch in pair:
-            if ch in used_lst:
-                raise ValueError("Invalid plugboard configuration.")
+
+    for pair in config:
+        if len(pair) < 2:
+            raise ValueError("Invalid plugboard configuration, pair of < 2.")
+        else:
+            for ch in pair:
+                if ch in used_lst:
+                    raise ValueError("Invalid plugboard configuration.")
             else:
                 used_lst.append(ch)
-              
         plugboard[pair[0]] = pair[1]
         plugboard[pair[1]] = pair[0]
-
-
+    
     return plugboard
 
 
@@ -152,14 +151,31 @@ def main():
     parser.add_argument('medium_rotor', help="middle rotor", choices=rotors)
     parser.add_argument('fast_rotor', help="fast [right] rotor", choices=rotors)
     parser.add_argument('initial_rotor_settings', type=str)
-    parser.add_argument('plugboard_config', help="plugboad config", type=str)
+    parser.add_argument('plugboard_config', help="plugboad config, example \"a:b,c:d\"", type=str)
 
     args = parser.parse_args()
     if len(set([args.slow_rotor,args.medium_rotor,args.fast_rotor,args.plugboard_config])) != 4:
         raise ValueError("You cannot reuse a rotor.")
     
+
+    plugboard_pairs = []
+
+    #parse cli input so that it fits 
+    #"a:b,c:d"
+    #our format of [("G", "B"), ("X", "Z")]
+    
+    if len(args.plugboard_config) > 0:
+        pairing_lst = args.plugboard_config.split(",")
+        for pair in pairing_lst:
+            pair = pair.split(":")
+            if len(pair) < 2:
+                raise ValueError("Invalid pairing format: len < 2.")
+
+        plugboard_pairs.append((pair[0].upper(), pair[1].upper()))
+
     machine = enigma(args.slow_rotor, args.medium_rotor, args.fast_rotor,
-                     [], "AAA", args.initial_rotor_settings, args.plugboard_config)
+                     plugboard_pairs, "AAA", args.initial_rotor_settings)
+    
     print(machine(args.plaintext))
 
 
