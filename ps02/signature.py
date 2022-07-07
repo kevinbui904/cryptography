@@ -100,6 +100,7 @@ def main():
             machine = enigma(args.slow_rotor, args.medium_rotor, args.fast_rotor,
                         [], "AAA", args.initial_rotor_settings)                    
         node_graph = build_graph(messages)
+        print(messages)
         print(signature(node_graph))
     
     else:    
@@ -117,24 +118,24 @@ def main():
                             for first_ltr in ALPHABET:
                                 for second_ltr in ALPHABET:
                                     for third_ltr in ALPHABET:
-                                        if count < 10000:
-                                            count += 1
-                                            messages = []
+                                        # if count < 10000:
+                                        # count += 1
+                                        messages = []
 
+                                        machine = enigma(slow, med, fast,
+                                                        [], "AAA", first_ltr+second_ltr+third_ltr)  
+                                        #have to reset the machine  after every encryption
+                                        for key in KEYS:
+                                            messages.append(machine(key))
                                             machine = enigma(slow, med, fast,
-                                                            [], "AAA", first_ltr+second_ltr+third_ltr)  
-                                            #have to reset the machine  after every encryption
-                                            for key in KEYS:
-                                                messages.append(machine(key))
-                                                machine = enigma(slow, med, fast,
-                                                            [], "AAA", first_ltr+second_ltr+third_ltr)                    
-                                            node_graph = build_graph(messages)
-                                            sig = signature(node_graph)
-                                            txt = slow + " " + med + " " + fast + " " + "\""+ first_ltr+second_ltr+third_ltr+"\"" + "\n" + str(sig) + "\n"
-                                            file.write(txt)
-                                        else:
-                                            file.close()
-                                            exit(1)
+                                                        [], "AAA", first_ltr+second_ltr+third_ltr)                    
+                                        node_graph = build_graph(messages)
+                                        sig = signature(node_graph)
+                                        txt = slow + " " + med + " " + fast + " " + "\""+ first_ltr+second_ltr+third_ltr+"\"" + "," + str(sig) + "\n"
+                                        file.write(txt)
+                                        # else:
+                                        #     file.close()
+                                        #     exit(1)
 
                                           
     
