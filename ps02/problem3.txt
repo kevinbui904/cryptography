@@ -1,0 +1,5 @@
+3. Prove that the signature of an Enigma configuration is independent of the plugboard. (I.e., argue that
+the signature of a particular rotor sequence/setting is unchanged when you alter plugboard pairings.)
+
+Let P be our signature-finding algorithm, and P(x) be the signature computed from a configuration x. 
+We will show that P(x) = P(x')  
