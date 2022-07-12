@@ -8,7 +8,7 @@ def main():
     sig_map = {}
 
     for line in file:
-        ln = file.readline()
+        ln = line
         ln = ln.replace("[","")
         ln = ln.replace("]","")
         ln = ln.replace("\n","")
