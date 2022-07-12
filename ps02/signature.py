@@ -108,7 +108,6 @@ def main():
         #every triplet of rotors and every initial setting (5*4*3*26^3 signatures)
         file = open("signatures.txt", "w")
         
-        count = 0
         #rotors
         for slow in rotors:
             for med in rotors:
