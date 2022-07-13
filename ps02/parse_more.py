@@ -84,18 +84,28 @@ def main():
                                     else:
                                         histogram[key] = 1
 
-    histogram = dict(sorted(histogram.items(),key= lambda x:x[1]))
+    histogram = dict(sorted(histogram.items(),key= lambda x:x[1], reverse=True))
 
-    print(histogram)    
-                                    
+    result_file = open("parsed_more.txt", "w")
+    for key in histogram:
+        txt = key + ":" + str(histogram[key]) + "\n"
+        result_file.write(txt)
+    
+    #percentage of most common keys
+    cur_max = 0
+    for key in histogram:
+        cur_max = max(histogram[key], cur_max)
+    
+    print(cur_max / 1054560)
 
-
-
-        
-                                    
-
-
-    print("hello world")
-
+    expected_value = 0
+    for key in histogram:
+        keys_shared = histogram[key]
+        expected_value += keys_shared * keys_shared
+    
+    expected_value = expected_value / 1054560
+    
+    print(expected_value)  
+                                       
 if __name__ == "__main__":
     main()

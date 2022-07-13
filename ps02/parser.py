@@ -31,13 +31,32 @@ def main():
             new_lst.append(ln[0])
             sig_map[key] = new_lst
 
+    file.close()
     histogram = {}
     for key in sig_map:
         histogram[key] = len(sig_map[key])
     
     histogram = dict(sorted(histogram.items(),key= lambda x:x[1], reverse=True))
-    print(histogram)
+
     
+    result_file = open("parsed.txt", "w")
+    for key in histogram:
+        txt = key + ":" + str(histogram[key]) + "\n"
+        result_file.write(txt)
+    
+    #percentage of most common keys
+    cur_max = 0
+    for key in histogram:
+        cur_max = max(histogram[key], cur_max)
+    
+    print(cur_max / 1054560)
+
+    expected_value = 0
+    for key in histogram:
+        keys_shared = histogram[key]
+        expected_value += keys_shared * (keys_shared/1054560)
+    
+    print(expected_value)    
 
 
 if __name__ == "__main__":
